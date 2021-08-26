@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "@aws-cdk/core": "1.119.0",
+    "@aws-cdk/aws-lambda": "1.119.0",
+    "@aws-cdk/aws-apigatewayv2": "1.119.0",
     "source-map-support": "^0.5.16"
   }
 }
