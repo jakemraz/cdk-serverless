@@ -2,6 +2,20 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
 
+
+
+// TODO : Separate middleware and run only when lambda runtime.
+const authMiddleware = (req, res, next)  => {
+
+  const { getCurrentInvoke } = require('@vendia/serverless-express');
+  const { event = {} } = getCurrentInvoke();
+  req.claims = event.requestContext.authorizer.jwt.claims;
+
+  next();
+}
+
+app.use(authMiddleware);
+
 app.get('/', (req, res) => {
   console.log('GET /');
   console.log(req);
