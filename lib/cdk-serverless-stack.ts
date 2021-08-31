@@ -33,6 +33,22 @@ export class CdkServerlessStack extends cdk.Stack {
       defaultAuthorizer: authorizer,
     });
 
-
+    this.createNewApi('tex');
   }
+
+  private createNewApi(serviceName: string) {
+    const dockerfile = path.join(__dirname, `../services/${serviceName}`);
+    const handler = new lambda.DockerImageFunction(this, `${serviceName}Function`, {
+      code: lambda.DockerImageCode.fromImageAsset(dockerfile),
+    });
+
+    const lambdaBackend = new apigwInteg.LambdaProxyIntegration({
+      handler,
+    });
+
+    const httpApi = new apigw.HttpApi(this, `${serviceName}Api`, {
+      defaultIntegration: lambdaBackend,
+    });
+  }
+
 }

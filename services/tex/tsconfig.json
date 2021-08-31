@@ -1,0 +1,15 @@
+{
+  "include": [
+      "src/**/*.ts"
+  ],
+  "exclude": [
+      "node_modules"   
+  ],
+  "compilerOptions": {
+      "esModuleInterop": true,
+      "module": "Commonjs",
+      "rootDir": "src",
+      "outDir": "./",
+      "target": "es6"
+  }
+}
